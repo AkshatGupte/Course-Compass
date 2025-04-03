@@ -17,7 +17,7 @@ const Recommend = () => {
     setError(null);
 
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/recommend?query=${query}`);
+      const response = await axios.get(`https://course-compass-gbjs.onrender.com/recommend?query=${query}`);
       const { udemy, coursera, youtube } = response.data;
 
       // Sort Udemy & Coursera courses by rating (descending)
