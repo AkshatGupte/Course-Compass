@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PlusCircle, Trash2, Save, CalendarDays, Rocket } from "lucide-react";
@@ -17,7 +18,7 @@ interface RoadmapItem {
 
 const Roadmap = () => {
   const { toast } = useToast();
-  const [roadmapTitle, setRoadmapTitle] = useState<string>("Business Roadmap");
+  const [roadmapTitle, setRoadmapTitle] = useState<string>("Your Journey");
   const [items, setItems] = useState<RoadmapItem[]>([]);
   const [newItemTitle, setNewItemTitle] = useState<string>("");
   const [newItemDescription, setNewItemDescription] = useState<string>("");
@@ -32,43 +33,43 @@ const Roadmap = () => {
       setItems([
         {
           id: "1",
-          title: "DL",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-          date: "2023-01-15",
+          title: "Basics of C++",
+          description: "Basic syntax, loops, selection statements",
+          date: "2025-01-15",
           month: "January",
-          year: "2023",
+          year: "2025",
         },
         {
           id: "2",
-          title: "Optimization",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-          date: "2023-02-20",
+          title: "OOP Concepts",
+          description: "Inheritance, Overloading, Polymorphism",
+          date: "2025-02-01",
           month: "February",
-          year: "2023",
+          year: "2025",
         },
         {
           id: "3",
-          title: "CNNs and OpenCV",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-          date: "2023-03-15",
-          month: "March",
-          year: "2023",
+          title: "STL",
+          description: "Data structures, implementations",
+          date: "2025-02-15",
+          month: "February",
+          year: "2025",
         },
         {
           id: "4",
-          title: "RNNs and LSTMs",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-          date: "2023-10-10",
-          month: "October",
-          year: "2023",
+          title: "DSA",
+          description: "Questions on GFG, Leetcode",
+          date: "2025-03-01",
+          month: "March",
+          year: "2025",
         },
         {
           id: "5",
-          title: "Transformers",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-          date: "2024-01-05",
-          month: "January",
-          year: "2024",
+          title: "Competitive Programming",
+          description: "Online/Offline cp events",
+          date: "2025-04-01",
+          month: "April",
+          year: "2025",
         },
       ]);
     }
@@ -368,17 +369,17 @@ const Roadmap = () => {
           </div>
         </div>
       ) : (
-        // View Mode - Horizontal Timeline
-        <div className="relative z-10 pt-24 pb-16 min-h-screen">
-          <div className="container px-4 md:px-6">
-          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-center">
-  <motion.h1 
-    initial={{ opacity: 0, y: -10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent"
-  >
-    {roadmapTitle}
+        // View Mode - Centered Timeline with points on the line
+        <div className="relative z-10 pt-16 pb-24 min-h-screen flex flex-col items-center">
+          <div className="container px-4 md:px-6 flex-grow">
+            <div className="flex justify-between items-center mb-8">
+              <motion.h1 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent"
+              >
+                {roadmapTitle}
               </motion.h1>
               
               <motion.div 
@@ -398,126 +399,120 @@ const Roadmap = () => {
               </motion.div>
             </div>
             
-            <div className="relative mt-16 mb-32 mx-auto max-w-6xl">
-              {/* Timeline line with animation */}
-              <div className="relative h-1.5 bg-cyan-500/20 rounded-full w-full mt-10 mb-32">
-                {items.map((_, index) => {
-                  const segmentWidth = (100 / items.length) * (index + 1);
-                  return (
-                    <motion.div
-                      key={`line-${index}`}
-                      className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-500 to-blue-400 rounded-full"
-                      initial={{ width: "0%" }}
-                      animate={{ width: `${segmentWidth}%` }}
-                      transition={{ 
-                        duration: 0.8, 
-                        delay: 0.3 + (index * 0.2),
-                        ease: "easeOut"
-                      }}
-                    />
-                  );
-                })}
-              </div>
-              
-              {/* Timeline markers and content */}
-              <div className="absolute top-0 left-0 w-full">
-                {items.map((item, index) => {
-                  // Calculate position along the timeline
-                  const position = (index / (items.length - 1)) * 100;
-                  const isOdd = index % 2 === 1;
-                  
-                  return (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, y: isOdd ? -20 : 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ 
-                        delay: 0.5 + (index * 0.2), 
-                        duration: 0.7,
-                        type: "spring",
-                        stiffness: 100
-                      }}
-                      className="absolute"
-                      style={{ 
-                        left: `${position}%`, 
-                        transform: "translateX(-50%)",
-                        top: isOdd ? "-160px" : "60px"
-                      }}
-                    >
-                      {/* Timeline dot with pulse */}
-                      <motion.div 
-                        className="w-4 h-4 rounded-full bg-cyan-400 mx-auto relative"
-                        whileHover={{ scale: 1.2 }}
-                        initial={{ boxShadow: "0 0 0 0 rgba(34, 211, 238, 0.7)" }}
-                        animate={{ 
-                          boxShadow: ["0 0 0 0 rgba(34, 211, 238, 0.7)", "0 0 0 10px rgba(34, 211, 238, 0)", "0 0 0 0 rgba(34, 211, 238, 0)"]
-                        }}
-                        transition={{
-                          repeat: Infinity,
-                          duration: 2,
-                          repeatDelay: 1
-                        }}
-                      />
-                      
-                      {/* Month and year label */}
-                      <div className="mt-2 text-center text-cyan-300 font-medium flex items-center justify-center gap-1">
-                        <span>{item.month}</span>
-                        <span className="h-1 w-1 bg-cyan-400 rounded-full mx-1"></span>
-                        <span>{item.year}</span>
-                      </div>
-                      
-                      {/* Content card */}
-                      <motion.div 
-                        className={`w-[220px] mt-3 bg-blue-900/30 backdrop-blur-sm border border-blue-400/20 p-5 rounded-lg shadow-lg ${isOdd ? 'rounded-tr-none' : 'rounded-br-none'}`}
-                        whileHover={{ 
-                          scale: 1.05,
-                          boxShadow: "0 0 20px rgba(56, 189, 248, 0.3)"
-                        }}
-                      >
-                        <h3 className="font-bold text-lg text-white mb-2">{item.title}</h3>
-                        <p className="text-blue-100 text-sm">{item.description}</p>
-                      </motion.div>
-                      
-                      {/* Connecting line to timeline */}
-                      <div className={`absolute ${isOdd ? 'bottom-0 h-[26px]' : 'top-0 h-[26px]'} left-1/2 w-0.5 bg-gradient-to-b from-cyan-400 to-transparent -z-10 transform -translate-x-1/2`}></div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-              
-              {/* Rocket animation */}
-              <motion.div
-                initial={{ x: "-50px", y: "35px" }}
-                animate={{ 
-                  x: "calc(100% + 50px)",
-                  y: "35px"
-                }}
-                transition={{ 
-                  duration: 15, 
-                  ease: "linear",
-                  repeat: Infinity,
-                }}
-                className="absolute"
-              >
-                <div className="relative">
-                  {/* Rocket exhaust trail */}
-                  <motion.div
-                    animate={{ 
-                      width: ["30px", "60px", "30px"],
-                      opacity: [0.7, 0.4, 0.7]
-                    }}
-                    transition={{ 
-                      duration: 1.5, 
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
-                    className="absolute right-7 top-1/2 h-1 bg-gradient-to-l from-transparent to-cyan-400 rounded-l-full -z-10 transform -translate-y-1/2"
-                  />
-                  
-                  <Rocket size={20} className="text-cyan-400 rotate-90" />
-                </div>
-              </motion.div>
-            </div>
+            {/* Centered Timeline */}
+<div className="mt-32 mb-16 relative flex justify-center">
+  {/* Main horizontal line */}
+  <div className="absolute h-1.5 bg-cyan-500/20 rounded-full w-full top-1/2 transform -translate-y-1/2">
+    {/* Animated line fill */}
+    <motion.div
+      className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-500 to-blue-400 rounded-full"
+      initial={{ width: "0%" }}
+      animate={{ width: "100%" }}
+      transition={{ 
+        duration: 1.5,
+        ease: "easeOut"
+      }}
+    />
+  </div>
+
+  {/* Timeline items directly ON the line */}
+  <div className="relative w-full min-h-[200px]">
+  {items.map((item, index) => {
+    const position = (index / (items.length - 1)) * 100;
+
+    return (
+      <motion.div
+        key={item.id}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.2 + index * 0.1,
+          duration: 0.7,
+          type: "spring",
+        }}
+        className="absolute top-1/2 transform -translate-y-1/2"
+        style={{ left: `${position}%` }}
+      >
+        {/* Dot exactly on the line */}
+        <motion.div
+          className="w-4 h-4 rounded-full bg-cyan-400 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+          whileHover={{ scale: 1.5 }}
+          animate={{
+            boxShadow: [
+              "0 0 0 0 rgba(34, 211, 238, 0.7)",
+              "0 0 0 10px rgba(34, 211, 238, 0)",
+              "0 0 0 0 rgba(34, 211, 238, 0)",
+            ],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 2,
+            repeatDelay: 1,
+          }}
+        />
+
+        {/* Text and box below the dot */}
+        <div className="absolute top-full mt-4 left-1/2 transform -translate-x-1/2 text-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 + index * 0.1 }}
+            className="text-cyan-300 font-medium mb-1 text-sm"
+          >
+            <span>{item.month}</span>
+            <span className="mx-1">•</span>
+            <span>{item.year}</span>
+          </motion.div>
+          <motion.div
+            className="w-[200px] bg-blue-900/30 backdrop-blur-sm border border-blue-400/20 p-3 rounded-lg shadow-lg"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 20px rgba(56, 189, 248, 0.3)",
+            }}
+          >
+            <h3 className="font-bold text-md text-white mb-1">{item.title}</h3>
+            <p className="text-blue-100 text-xs">{item.description}</p>
+          </motion.div>
+        </div>
+      </motion.div>
+    );
+  })}
+</div>
+
+
+{/* Rocket animation directly on the line */}
+<motion.div
+  initial={{ left: "-50px" }}
+  animate={{ left: "calc(100% + 50px)" }}
+  transition={{ 
+    duration: 15, 
+    ease: "linear",
+    repeat: Infinity,
+  }}
+  className="absolute top-1/2 transform -translate-y-1/2"
+>
+  <div className="relative">
+    {/* Rocket exhaust trail */}
+    <motion.div
+      animate={{ 
+        width: ["30px", "60px", "30px"],
+        opacity: [0.7, 0.4, 0.7]
+      }}
+      transition={{ 
+        duration: 1.5, 
+        repeat: Infinity,
+        repeatType: "reverse"
+      }}
+      className="absolute right-7 top-1/2 h-1 bg-gradient-to-l from-transparent to-cyan-400 rounded-l-full -z-10 transform -translate-y-1/2"
+    />
+    
+    <Rocket size={20} className="text-cyan-400" />
+  </div>
+</motion.div>
+</div>
+
+          
+          {/* Roadmap title at the bottom center */}
           </div>
         </div>
       )}

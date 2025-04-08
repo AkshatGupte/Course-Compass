@@ -78,22 +78,22 @@ const About = () => {
               {
                 name: "Akshat Gupte",
                 role: "ML Developer",
-                bio: "Former education consultant with a passion for accessible learning.",
+                bio: "Data collection, analysis and working of recommender system.",
               },
               {
                 name: "Aditya Tiwari",
                 role: "Frontend Developer",
-                bio: "ML expert specializing in recommendation systems and educational technology.",
+                bio: "Frontend of whole website with UI/UX.",
               },
               {
                 name: "Aditya Bajaj",
                 role: "Backend Developer",
-                bio: "Creating intuitive learning experiences that engage and inspire.",
+                bio: "Managing of backend along with roadmap design.",
               },
               {
                 name: "Atharva Pagey",
-                role: "Backend Developer",
-                bio: "Curriculum expert ensuring quality learning pathways for all users.",
+                role: "Database Design",
+                bio: "Handling of database for user profiles and roadmap.",
               },
             ].map((member, index) => (
               <motion.div
